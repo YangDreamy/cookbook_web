@@ -1,0 +1,100 @@
+h2{
+    text-align: center;
+    font-size:xx-large;
+    color: coral;
+}
+h3{
+    text-align: center;
+    font-size:middle;
+    color: coral;
+    font-weight: 600;
+}
+* {
+    box-sizing: border-box;
+}
+
+/* body {
+    margin: 0;
+    padding: 0;
+    background: #e6c866;
+    font-weight: 500;
+    font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+} */
+
+/* #container {
+    width: auto;
+    height: 820px;
+    margin: 0 auto;
+} */
+div.search {
+    width: 800px;
+    padding: 30px 0;
+    margin: 0 auto}
+
+form {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+}
+
+input, button {
+    border: none;
+    outline: none;
+}
+
+input {
+    width: 100%;
+    height: 42px;
+    padding-left: 13px;
+    padding-right:46px;
+}
+
+button {
+    height: 42px;
+    width: 60px;
+    position: absolute;
+}
+
+.bar1 {background: #f1e3bc; 
+}
+.bar1 input {
+    border: 2px solid #bba007;
+    border-radius: 5px;
+    background: #F9F0DA;
+    color: #e77e05;
+}
+.bar1 button {
+    top: 0;
+    right: 0;
+    background: #bba007;
+    border-radius: 0 5px 5px 0;
+}
+.bar1 button:before {
+    content: "search";
+    font-family: FontAwesome;
+    font-size: 13px;
+    cursor: pointer;
+    color: #522a03;
+}
+
+.search-input:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+.btn-list{
+    margin: 0 auto;
+    cursor: pointer;
+}
+.btn-list btn-share{
+    
+    transition : all 0.3s;
+   
+}
+
+.btn-list btn-share:hover{
+    
+    transform: scale(1.3);
+}
