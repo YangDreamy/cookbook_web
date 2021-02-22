@@ -1,13 +1,49 @@
 <h2>Cookbook</h2>
 <h3>make a good diet and keep healthy</h3>
 <!-- <div id="container"> -->
-    <div class="search bar1">
+    <div class="search bar1 ">
         <form>
-            <input class="search-input" type="text" placeholder="recipe..." ng-model="search">
-            <button type="submit"></button>
+            <input class="search-input" type="text" placeholder="recipe..." [(ngModel)]="rname" [ngModelOptions]="{standalone: true}">
+            <button (click)="SearchByName()" ></button>
         </form>
     </div>
-    <button class="btn-list">title</button>
+          <div id = "btn-list" *ngFor="let typeList of recipeinfo">
+              <button class="btn-share" >{{typeList.type}}</button>
+          </div>
+    
+    <!-- <div class="card-columns">
+        <div class="card" *ngFor="let movie of movieList"> 
+          <div class="tools  pull-right">
+            <a class="btn btn-primary btn-sm" [routerLink]="['/playmovie']" [queryParams]= "movie"><i class="fa fa-eye"></i></a>
+            <a (click)="UploadMovie(movie)" class="btn btn-danger btn-sm"><i class="fa fa-pencil"></i></a>
+            <a href="" (click)="DeleteMovie(movie.m_id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{movie.m_id}}:{{movie.title}}</p>
+              <footer class="blockquote-footer">
+                <small class="text-muted">
+                  {{movie.added}}
+                </small>
+              </footer>
+          </div>
+         </div> 
+    </div> -->
+
+        <div id="responsive">
+            <div class="img" *ngFor="let recipe of showList">
+                <a target="_blank">
+                <img src ='data:image/jpg;base64,{{recipe.image}}' width="300" height="200"/>
+              </a>
+              <div class="desc">{{recipe.intro}}</div>
+              <div class="tools  pull-right">
+                <a class="btn btn-primary btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)"><i class="fa fa-eye"></i></a>
+                <a  class="btn btn-danger btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)"><i class="fa fa-pencil"></i></a>
+                <a  class="btn btn-danger btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)"><i class="fa fa-trash"></i></a>
+            </div>
+          </div>
+    </div>
+    
+    
 
 
 
