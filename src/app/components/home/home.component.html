@@ -5,43 +5,57 @@
         <form>
             <input class="search-input" type="text" placeholder="recipe..." [(ngModel)]="rname" [ngModelOptions]="{standalone: true}">
             <button (click)="SearchByName()" ></button>
+            <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)" />
         </form>
+       
     </div>
-          <div id = "btn-list" *ngFor="let typeList of recipeinfo">
-              <button class="btn-share" >{{typeList.type}}</button>
-          </div>
-    
-    <!-- <div class="card-columns">
-        <div class="card" *ngFor="let movie of movieList"> 
-          <div class="tools  pull-right">
-            <a class="btn btn-primary btn-sm" [routerLink]="['/playmovie']" [queryParams]= "movie"><i class="fa fa-eye"></i></a>
-            <a (click)="UploadMovie(movie)" class="btn btn-danger btn-sm"><i class="fa fa-pencil"></i></a>
-            <a href="" (click)="DeleteMovie(movie.m_id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-          </div>
-          <div class="card-body">
-            <p class="card-text">{{movie.m_id}}:{{movie.title}}</p>
-              <footer class="blockquote-footer">
-                <small class="text-muted">
-                  {{movie.added}}
-                </small>
-              </footer>
-          </div>
-         </div> 
-    </div> -->
+    <div class = "div2" >
+        <button class="btn-share" (click)="SearchByType(typeList.type)" *ngFor="let typeList of recipeinfo">
+          {{typeList.type}}
+        </button>      
+    </div>
 
-        <div id="responsive">
-            <div class="img" *ngFor="let recipe of showList">
-                <a target="_blank">
-                <img src ='data:image/jpg;base64,{{recipe.image}}' width="300" height="200"/>
-              </a>
-              <div class="desc">{{recipe.intro}}</div>
-              <div class="tools  pull-right">
-                <a class="btn btn-primary btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)"><i class="fa fa-eye"></i></a>
+<div class="div2">
+  <div style="width:60%">
+    <div class="div1">
+      <article  *ngFor="let recipe of showList">
+       <img src ='data:image/jpg;base64,{{recipe.image}}' [routerLink]="['/recipeinfo']" [queryParams]= "recipe"/>
+        <a href="">
+            <div>
+                <h3>{{recipe.name}}</h3>
+                <div class="desc">{{recipe.intro}}</div>
+            </div>
+        </a>
+        
+      </article>
+    </div>
+
+  </div> 
+  <div style="width:40%">
+    <h3>RECOMDATION RECIPE</h3>
+        <div class="div3">
+         
+          <article  *ngFor="let recipe of showList">
+            <img src ='data:image/jpg;base64,{{recipe.image}}'[routerLink]="['/recipeinfo']" [queryParams]= "recipe"/>
+              <a href="">
+                <div>
+                  <h3>{{recipe.name}}</h3>
+                  <div class="desc">{{recipe.intro}}</div>
+                </div>
+              </a>  
+          </article>
+        </div>
+      </div>
+</div>
+
+    
+              
+              <!-- <div class="tools  pull-right">
+                 <a class="btn btn-primary btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)" [routerLink]="['/recipeinfo']" [queryParams]= "recipe"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-primary btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)" ><i class="fa fa-eye"></i></a>
                 <a  class="btn btn-danger btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)"><i class="fa fa-pencil"></i></a>
                 <a  class="btn btn-danger btn-sm" style="background :rgb(241, 237, 236);color:rgb(231, 111, 81)"><i class="fa fa-trash"></i></a>
-            </div>
-          </div>
-    </div>
+            </div> -->
     
     
 

@@ -4,16 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { RecipeComponent } from './components/recipe/recipe.component';
+import { CommonModule }     from '@angular/common';
+import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

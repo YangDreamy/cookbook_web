@@ -14,13 +14,14 @@ h3{
 }
 
 #search {
-    padding: 30px 0;
+    margin: 0 auto;
 }
 
 form {
     position: relative;
-    width: 400px;
-    margin: 10px 100px;
+    width: 600px;
+  
+    margin: 0 auto;
 }
 
 input, button {
@@ -31,13 +32,13 @@ input, button {
 input {
     width: 100%;
     height: 42px;
-    padding-left: 13px;
-    padding-right:46px;
+    /* padding-left: 13px;
+    padding-right:46px; */
 }
 
 .bar1 {
     width: 1200px;
-    height: 70px;
+    height: 100px;
     background: #f1e3bc; 
     padding-top: 3px;
     padding-bottom: 3px;
@@ -73,24 +74,35 @@ input {
     box-shadow: inset 0 3px 3px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
 }
 
-#btn-list {
-    padding: 5px;
-    width: 80px;
-    height: 50px;
-    margin: 0 auto; 
-} 
+.div2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    /* margin:0 auto */
+}
+
 .btn-share{
-    /* margin: 0 auto; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 0.5em; */
+    width: 7em;
+    height: 3em;
+    margin: 1em;
+    /* display:inline-block; */
     cursor: pointer;
     background-color: #caa93c; 
     color: rgba(53, 45, 4, 0.993); 
     border: 2px solid #f1e092;
     border-radius: 12px;
     transition: all 0.3s;
-    width:100px;
-    height:40px;
-    display:inline-block;
+    /* width:100px;
+    height:40px; */
+    /* display:inline-block; */
 }
+
 .btn-share:hover{
     transform: scale(1.3);
 }
@@ -99,29 +111,175 @@ input {
     height: auto;
     margin: 0 auto;
 }  */
-#responsive{
-    width: 1200px;
-    height: auto;
-    margin: 0 auto;
-} 
-
-.img {
-    margin: 5px;
-    border: 5px solid #ccc;
-    float: left;
-    width: 300px;
-}
-
-.img:hover {
-    border: 5px solid rgb(216, 197, 26);
-}
-
-.img img {
-    width: 100%;
-    height: auto;
-}
 
 .desc {
     padding: 15px;
     text-align: center;
+}
+.div2{
+    align-items: flex-start;
+
+}
+.div1{
+    width: 100%;
+    height: 100%;
+    /* border: #000 solid 1px; */
+    /* margin: 50px auto; */
+    /* overflow: hidden; */
+    display:flex;
+    flex-flow:row;
+    flex-wrap: wrap ;
+    justify-content:space-around; 
+    align-items:center; /*元素被拉伸以适应容器。各行将会伸展以占用剩余的空间。如果剩余的空间是负数，该值等效于'flex-start'*/
+}
+
+.div1 article{
+    width: 240px;
+    height: 220px;
+    position:relative;
+    display:inline-flex;
+    justify-content:space-around; /*元素在主轴（页面）上居中排列*/
+    align-items:center;
+}
+
+.div1 img{
+    cursor: pointer;
+    transition: all 0.6s; /*延迟*/
+    width: 240px;
+    height: 220px;
+}
+
+.div1 article:hover img{
+    transform: scale(1.1); /*放大*/
+    filter: grayscale(20%); /*黑白*/
+    opacity: 0.4; /*亮度*/
+}
+
+.div1 a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    vertical-align: middle;
+    top: auto;
+    left: 0;
+    /* top: 50%;
+    left: 0;
+    transform: translateY(-50%); */
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.6s; /*延迟*/
+}
+
+/* .div1 h2{
+    font-weight: 900;
+    line-height: 1.5;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+} */
+
+.div1 div{
+    transition: all 0.6s; /*延迟*/
+    max-height: 0;
+    line-height: 1.5;
+    margin-top: 0.35em;
+    opacity: 0;
+}
+
+.div1 article:hover div{ /*显示简介*/
+    opacity: 1;
+    max-height: 15em;
+}
+
+.div1 article:hover a{
+    color: #000000;
+}
+
+
+
+
+
+.div3{
+    width: 100%;
+    height: 100%;
+    /* border: #000 solid 1px; */
+    /* margin: 50px auto; */
+    /* overflow: hidden; */
+    display:flex;
+    flex-flow:row;
+    flex-wrap: wrap ;
+  
+    justify-content:flex-start; 
+    align-items:center; /*元素被拉伸以适应容器。各行将会伸展以占用剩余的空间。如果剩余的空间是负数，该值等效于'flex-start'*/
+}
+
+.div3 article{
+    width: 210px;
+    height: 210px;
+    position:relative;
+    display:inline-flex;
+    justify-content:space-around; /*元素在主轴（页面）上居中排列*/
+    align-items:center;
+    margin:1em;
+}
+
+.div3 img{
+    cursor: pointer;
+    transition: all 0.6s; /*延迟*/
+    width: 210px;
+    height: 210px;
+}
+
+.div3 article:hover img{
+    transform: scale(1.1); /*放大*/
+    filter: grayscale(20%); /*黑白*/
+    opacity: 0.4; /*亮度*/
+}
+
+.div3 a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    vertical-align: middle;
+    top: auto;
+    left: 0;
+    /* top: 50%;
+    left: 0;
+    transform: translateY(-50%); */
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.6s; /*延迟*/
+}
+
+/* .div1 h2{
+    font-weight: 900;
+    line-height: 1.5;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+} */
+
+.div3 div{
+    transition: all 0.6s; /*延迟*/
+    max-height: 0;
+    line-height: 1.5;
+    margin-top: 0.35em;
+    opacity: 0;
+}
+
+.div3 article:hover div{ /*显示简介*/
+    opacity: 1;
+    max-height: 15em;
+}
+
+.div3 article:hover a{
+    color: #000000;
 }

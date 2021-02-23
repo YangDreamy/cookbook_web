@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
+import {FileUploader} from "ng2-file-upload";
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  
   public rname:string="";
   public showList:any=[];
+  public typeList:any=[];
+    type:string="";
   public recipeinfo : any=[{
     type:'breakfast',
     name:"tomato and eggs",
@@ -30,13 +34,47 @@ export class HomeComponent implements OnInit {
     image:"/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUQEhIVFRUVFxUVGBUVFxUWFRUVFRUWFxYVFRYYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGzAmHyUvLS0tNS8tLS0tKy0tLS0tLS0tLS0tKy0vLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAABAAIEBQYDBwj/xAA9EAABAwIEBAQEAgkEAgMAAAABAAIRAwQFEiExBkFRYRMicYEykaGxQsEHFBUjUtHh8PEzYnKSgrIWQ2P/xAAaAQACAwEBAAAAAAAAAAAAAAABBAACAwUG/8QAKhEAAgIBBAEDBAIDAQAAAAAAAAECAxEEEiExQRMiUQUyYXEU8JGx4RX/2gAMAwEAAhEDEQA/APYkoToRhQqNhKE6EkQjIShPhCECDE2F0ITSECDCEITymqEAkigoESSSEqECimyjKAQopspAqBHJISlKhAoFCUECCQSlAlQIimFElMJQCIlcyU4lc3FAIkk1JAhcIpIrcxFCCKSBAIIoIEAUwpxKaVCAKaiU1QgpQSQUCFBJAoEDKqDxFQFd1tJztiTHlE8pVqvK8dLrO/e5/wANc52u77Ee0BL6iyVccxHtDp4XylGT5xx+z1RrgdQZTlj8NxiQIKu6OJHnqhDUxkZ2aacHgtpQlRqd40849V2zLdST6MGmuxxKzuMcRClcMojUDWoI5HaCr4leecS3QGIQQB5G6nnul9VZKEMx+UP/AE+mNtjjL4Z6IyqCARqDqkSqfBLryhvLl/JWhK1hPdHIrbXsk4jiU0lAlAlEzESmOKTimEoBFKSbKShC9RQSTBiFAlJBAgk2UZTSgQRKaSimFQgCUEUCoQBQRVLxbVrttarrf/UDZ2kx+KO8bKsnhZNKob5qOe3gVOu8uc8kRmLWkHoNiPdWVO5aRqQDvEry/CuOarqDaBYwuaRNRxgABoaCR+IkDfTYrS4ZdeJ8RBJ5j8kr/JjnCOjb9Mtrzu8GrdcsG7gs1xjb211RyPdDm6scN2u/koWMPqUfNqWHmOXYqXgeH+J+9rDTk0/cqrvc3twZRq9HFif6PNLDFqlE+G9pEGC4zB7ytTY8QtOgMr0Cpb0y3Llb6QIWQ4h4WpuBfbtFOpvA0a7sRyS9mnlFZgx+OtqueJxx+SRSxORunsxUt5rKYXZXhf4fhOBG5Og+ey1eH4O5pzXDA5sfCHaz1Wdbsb+A2Qrh3ySqHETdnLLcdYm01qDmNzEtcM0d9iqnie78OrlpMa0NEkZnHn1J6QNuar727oVQx7X1hUAjwyA5m+rvEER6RurylKcGnyhijSxrsjYljJt8Ev3EDSIWytq4e2fmvN8GqwBMrV4deZT2O6mktwsMS19WZNo0UppKYag3lUmJcSU6bvCZFSrr5RMNjm8jZPymo9nOrqnY8RRc1aoaC5xAA3JMAe65ULum/wCB7Xf8SDv6LJX9rVuIdVcdvMwTkaeTWjrG5MqBwlbNpX7mMEDwnTHMgt1KwWozLGB16FKtycuUs4PQEkEkwc4v0kEUyYiQSSKBAJpTkCgQCYU9NKhBpQAlODZQua7abdSgyyi2RXXTZLZ1CAeNzsqK+qOfUzNBA780LquWtygy4/RLStGlp3wZzj3C7YzUtx4dbXMWaNe38QcOZVdwjfgt1fBBiDodO3JdsdqwCJnqVj8JvctWCScx/wAfyXPvlu5S5R6TRxcqnXJ5PYraqHtgw4FSM+QabfkqLCbiAJEFXJqcwtarG45OTqKdssHN2JgFc33YJmVCxOgYL2e7evosXiPErGHLOsxHOfRWdj6Kwoz0ej29wC4kbSu17XgarN4BiI8MTvuo3FGPhlN2u409Y0Wbtwv2bw07nNJIwfFN6XVamoiYHXus9b4k5pgHSTp6oX9cuMDVzj9StfwfwOx8PuAXc8skD3hbU1e3ke1mpVclFeDpgmLl4DeciD25ytD+2KdNhc9wEfXsOq1GH4La0Gu8OixpLS0w0ag9SsFU4eeK5FSC3Xw9DEHr/uCxnU63ldCcLq75PPBPbj9W5YW089JvXd7uzeinYTg5A+GJ1J3c48y525VlhODsoxBkga6RrzjVXrAIVEpSeZAnfGtONS4Ky8hlONoB16rPcFkPvKz/AOFgH/Z39Fa8TXMMIUD9HhaKdaq7QuqRJ5ho2+ZK0hzYkZZaonL54NpKSZ47eoST2TmYZoEUEk0LhSSSQIBKEUkCDSudR0CV0KTKU6lB/gKOLrgNbm+iyWMXbqlTKHkZd2t3PPXstBjbSAXN3hYu5f4D33Vby5mBpcGl05DvA5we2yWub6Oho605Z8+C2tnPcZcYaNmjf1cVxv7ljJPNZt/HVMnK1paB/Fu71jZQsSx5jwcrxOhGvOdkhZaksI6a0Nu5OSwjhxFehw0KxlOuRVzAwRqD6LvieIZpjrKpalxDgVamttNsfW2jGT0/h9zyGEv0dsTuY3+63lnZVXN2gdTz7wsP+i+myqQXGfC1I5Au2jvA1Xqjq4iArafT4y5HN+p6lOe2BnbvD6nIg9uawfE3Dra7s8ZKzTqY+Ls4fmvSn6H1Kr8XsPFZIgO5E/3sryrxzEUp1Ek+TzSjiDqOZryARECdT7KhxK+qXDvI1zso2EmO56bL0dvBdF/nuXOqv7EtYOwjU+q71sPp02inTY1rRyaI9z1PdLxhGHuxydNaxJYj2eZ8LYQ99YPe3RvLv3XseFUA0DTT7LNMtPDdnA9R1V9a4k0tgf2U5CzPZzLsyZbVT8lX1CJ1TK+IAaKtq30GfkO6k5LBnCt5Lqyy8zGvSVLuazWjQ/NVNlWnU89U25rmo7KwTHy9ylk+DeUOSh4nuS7Qantuo/DF85pFtUZENLyZ5l20e6s77JQDqjtXAb9PRVPDDvFfUuD+I5W9QG7/ADP2UrT38DLjFaduS/X7NZnakuOVJNnJyehBFAJwTwmJFJJAgkCjKaSgQc1srqFzt9l1KCeVktjBWYhTzCFGvLNhpeGQCCNQVLvqgG5Vde37cwE7BY2SSTyM0qTawee336O25iW1XBskxAJA6Sob/wBG2b4Lgt9WB32IXpfiBy50y2d90riK6Os9bqGsNnmVP9E9WZdcNcOgaWn56q7s/wBH1KjBbTYXD8TiSfaQtu+7aOfZZ3HeKm0muykEga6/DJgEoStjEyjG+54KG1rUcPuKrHGPGLXnL8NM7a+p10V/inEbKDPEcRyAjmeQHVeWXDn3NXR2r3Eku+ZcfQD7LrxJiWYim52gMj7aqilJrI/boao2QhJ/s0g46q069Ktr4YLs9MAQ9h0ME79QdNlpWcQ21aKlGro8/wCm4EOZABIcOUbd4kSvJ7yuDkyty5WAO1+JwJGbtpl06gnmo7Lp4dmDsp30QzLbgau+nUyw48Nf3n+5PbDWB5qO9o5led2PFz2th4nuOitv/k7CJLgquXyjmz0NkOui/vKwgjos5e1w3zgxOkjr3C5V8eZJOYEDXfkeRVNd4jTLXeeenp0WblKT4RtVpscyLOjir3QMwk6Hqrqy80c+6xvDllVrVmup05Y2Zc7RnuefoF6Zhtkyl5j5n/xRAH/FvL791q+OGYXRjCXtJNtbGBOg+v8ARNrXDaYgaD7pl/iAGkrK4rjOUHmFnKxLhEqplY+SBxdimfyMcPMcpE66rS8NWmVjWgbAKg4JsBVfUuKglrpY1p2iQSfYgD5rcWrQzyhMVwcUU1tsc+lHpf7JPgHp9kl1zlJacnONeE4JoTpXREQpIBFVIJNfsig4bqs/tZaPZxtq+UwdJ2UqpU5BQadPM4A8tVPDVjp23Hk0sxkh3FtIMrB4hULK5DnfF8PflC9DrjRZHH8PLjnGWWyQXAGPSearqYZjwNaKajPDK12Jho9yFX3nEbKbWmdtxOvyVY2hdXb/AAaDD5ZLqjxlZJ6GJPy3lW9p+i9p81xWe93MMhrfmZP2XOjp7bP0d+UtJSl6j5+EZXFeLnPkMOhM66H5zos0bh9R2WC4kydvSSV7A3gqzpAAUWugz55cZ913OCsmQxo9AEzHSqJX/wBauKxVHBnMH4WY1jHVATULdZjSdwD78+ikv4UsnSXUGknc+Yn6Faao07KPUoOmY0Vm0uhL1XN5kzMXXBlLw3Novcxro0kxptofXZVL+AZENqkHeHNb9Ct5TouJDepVhbtaN9e+UfadUE0wy1VkFxI8rq/o2uD8FVs9HNMfME/ZUuIfo9xNh0ZTqf8AB4H/AL5V7swd9Owj7LncOGyumkLy1V032fOF3w9iNOQ61qju0Zx82SFoeHODYirduHKKU8/95/IL1+6LYynnttr2CxHFFxSALKro12aA5x35THzIWdtzxhG+nqlZL3NlrQZlAa0QBoANE+rVjQKnwa5cKTGuEGNuYH4R6xCkXVw0CDoUo8RRb025YImJ1y3WFkbx/j1WUmAgucAdfnE9pV5f1nuacrge3MKLwFaCrduc4asaSJ5EmPnujp47pZH5SVNLl5RsLIMpNDGCA0QAriwtXPOaYBVZc2eWqCD5Xcuh5rWYYwACNF0YrL5POSfkX7Ib/E76Iqf4zeyS12Iy3MsJSCCcFsLBSSRUCJAIoM3QYUc7YQ4qUoldsGQjRuwfK7Q/Q+iwqmoPYzSUc8o61W7FVl3SJmBurZxELjlW0lkqngrLVjqYgNA9N/dNvqzqcZjv9FbAKqxRgcTPIaKko4RdSy+Sr/WC9w9V3uKmVVlvVyvGnaUOIrrI8NnZpcf/AC0H/qUpZPZBsfoq32KJNpXYJIPb6qVTDZ0Mdt1i24hAcdTt/P2Vg7FC3K7aRuEpDU8ZkP26J59pqPD1gASOYnkutqfMPh/P/KzRxhxAOefUpXGI5XNdOh+629ePYs9JN8MvqlTQ+cQO52J+yrbi4a1wGcT6zr7CPqoNziLRmLhlJAHmcPMZBJDT6T0WZv8AF617UFG2YDoS4tDRAkwXO5chEqrscvt7NqdI+5cLyyXxDxGymH0xmdVJGUDaeYdG86/Plschd3D21i6qzI4geWZ069yTr/hbnBOBRSirWd4lXefwtJ6Tv6n6KFxzgOeiXsb+8paiNy38Te/X2V/47xl9mn8uqM1XDry/74KehiLCBPz790bm+jzaOCzeC1y45CJDpjrICm4zbmgGeYEvaP3ckvnUE/NLuqTY4oQi0snHEqrX603QSdu/IDqtvwVg5tqWd/8AqVQHO7Dk1ZfhnhyoXi4qgtDTIaRv0JW8t35nNZ7ewTNMVAQ+oXJx9OL/AGTTh76kEGIM7TKm3LKjGzPtz9VZ2uggKDitQkR0TO3jJxslP+unqUkcw6BJVwyxuQnhMCcnBMIRQRQCIoN3RKaSoWOlRshVtzSkKyqVABmJgDWVGcQ9oewgg9EtfXuRrBtEHC3P8QgvJGU6HrI91bKrgtIeNx9VZW9YOEj/AAeiGkn7dj7DcucodMKsvdZVjXCr3001IziZurauzaBV3G2GXNU06lCnmMZXtkAwPhIkgb5ufNbm3tQPMu4ohLyoUlhjVOrlVNTj2jxxmC4ifL+ru3JMPpxP/bXRQsbuq1LK2oxzQ0DUxlJP8JGhPZe3vaACsvfWjHl1N7Q5rp0IBB6ghLWaKB0IfV5Sl74rB5uzGqWSJLtdJJE6a6Abe67HiF9RgbSY4kS0imJcPXn7laOx4RtadbP4LXAn4XeYA9geS2bcKZEBoDf4QIHvCpDRx+Riz6pUvtjn9nlGH4Y6s6LkOyyDkZ8ca+VzhIAM6ga6DUL0/B3UaVNtNlLI0DYNj+yrGnh7BoAAPRCvbtDTG/JOV1+mvajl6nWSvfu/4Qq18wugFRbhgIUW6pB2ux6pmHCoagY4yI/sI7s9i2PgrKXCbHOLmjKHOzEAAST333WoscCpMh2QZtpgTA7q1o0AE4u1hXUESV0nxkqsSDQzIGiOiy9e2yvztOnLstJiDpJVDXMgrGxFoPBd4beZmz7KPiL1W4NeAeWYldsSu2tBJIVlJbQNe445uySq/wBp/wD5u+X9Ulj6sPktskepJBBEJ8THIoJBAIU1ycU0oBRnsXxMOpmi0+YPyOHbf6ghOwqv4MBxOR2nWHcj6FR8Ss4rvMfHlPqQIP5KVVaQ0EDVsEespWUmpHU2wdaivJcVqHMKC6QSWmD9D6hWg1C5VqQKllOeY9iMZ44ZWuxF7R5mT3afyKhXPEDW/wD1vJ9B/NWT6RHJRqtu06EJaVt0fJslB+Dvw/iv6xTLsuUtcW5T03B/voVZrPULc03Z6cTzHJw6FXFvfNO/lPQ/kdimtPqFJYl2ZWV4eY9Harq1U91T5q4rkR/e6rqzUxLkzicLBk1BorkiFk73HadAzOZ38LdT/RWvD+OsumzlLHj4mHeOoPMLOFkM7U+S8oSxuxwWbnKNeO5KXWhVt1stGZoprzddsMfFRny17hC5bB7HmsZjWLVTVY22dGR2ZzhBBI2b6dUtZZGHLN4QcuEesRzUOtUiVnsM4odlArUy0xqW6tPcDcKVUxui7Uk/9XfyWnr1tcMp6Ul4G4gVSYpWyMJG5kAdSdlPu8VYfha5x5SIHvKztzWzOLn7jYRoPQ8zCXuujjEWaQg/JWULRzQPO6efmP0UzJpIJcdpcZ912NSTAEk6Rv6egUm3tm0mxmzO799NAk4wlJ/g2bwQPCqd/kkrfw3f2f6pLX0Sm89GTgmohdcQHJBJIIBEU0pxTSoWKvGG/C7ofuhUEt9lNuaQcC0qFTBGh5Je2PI3VP24+CVg9YupDMZIkH2Ok94hTCVn7Ov4NeDoypA9H8j77fJaAo1yzEpqIbZ58PlDSFwqW4O/99l3cVksb4meyt4FENdAOYk/CdIEBSzbj3AprnY8QLypaHkQVCqsePwn7j81yp8QFrWmrTPKXNOncweSuaVVrwHNIIOxGxS7phL7TSSnX9yKh1bTcj0Jj6LlUph25f8A9jCuH27SZjX5KNVw8HZzgfVZyomRWRKQYdSGkAJ7LZrHZmuykDcfburWph8iM30UarYvA0LT7EevXVY+hKPSL+on5AMSqgbsdy2IJ+RXGriVU7Bg+ZQOHv2yj1zR77bricOq7Q2OuYz67arTdd+QYh+CDc031DFSro4bN8o9FwZhrKYkGfYbeynOw6rnHwZddeY9p1+i7jDi3m32EDusnVKTyy6mkRM7By32Pf0Cj1qgJykEl20fyU1uFsGpMkSROsTvC7ZG6QPhEfLmrxofko5rwVX6q/UARGgzbHrqnUbABpzmddPRWNTv/hUnE2LtoNbMgvOURsDG57BaqqK5AnKTwir4gxM/6FCBHxEfh7D/AHLL07upRqse6o+AYdJLvL01Vth9GG67kyTzJOpKrcXoyVTfzkergl7TWftNndJYDwHfxfUpLTejP+Mvk+mUQgiF0jjDkkEkAhTSnIFQIxwUW4p8wpZTHBUksl4ywzO43QzMnmNRG4hWHDuKivSBJGdvleOhHOO+6N7QkGF5zir61vWzUanhkkAntOsjYpRycJ/hnVpqjqa3DOGuUei49ijKFJ1Rx2BAA5ujQLA8P0zUcazy41HnM4mInoIGg2+Si0bd9Uy4l0+YgkkO6x3WlwaxDdRtuOyyssc5JIbqojpqnl8sn1qIII7LNYTf1ra9p0Gv/cVnEFhEgPIcQW/wyY7brWu3WW4msnH94weamc7SNw5uoI6+iEpNNNFdNtlmuXTXn5+T0IhcnvgxB9QFC4exVtzbsrNO4AcIgh40cCOWqsCnc5XBxZQcJOMu0McFwpXEuczK4ZeZGh9Cu4douD3d+/sgwID6gA1VBiHEtJkhk1HDTK2N+55LO8QcQ/rbzb0XxTBIe7UFzgYhpGsab6SpNhh4Y0aBYys5wh6GlxFSn/gi3HHzmVQ19vlpkgF2eXCdzGWNOk+615rBzWuaZDtZ6g7QvPeKqILHAjXkrf8ARfdZrZ1I703kbyfNrtyH8lWubk2mb6rTQjUrILHyakqNcGBI5fWFKqaKO9w3PLVaM5oqNTMwudEx8+6wHF134tdlAEQ3zHrmOjR8p+av+KMaFvTLhq92jAOZ/ksZgltmPivkvJlxO5JWNkuMDulrxmx9IuaYgAdFAxPQE81Ne7mq68aXkNCzUS+7Dyykznskr/8AY/ZJa+myfyYnvQSSSXSOGFJCUkCwUkJSlAIimlIppUCMqCVmuJ8FFak6B5wPKescitK5cajVjOCkb02yrkpIwnDFPyhpEEcj+S1bKcDRQqmEZHmpTMA6lvKeo6KfTdISyrcezo36hWPciOd1FxOhnbEwOam1WLlVEggqjiCE8NNGLoYo6xqzTM03H960jfYZ2/7gPmvQ7W9bUaHsIc0iQRzCw2NW5M5GNPqqDCOKn4e7wqrc1ImYZEsneORE8vVSixp7WN6vTevD1Ifd5/J69UesbxZxQKLvCoZH1jo4nXwxE6jrrsqfiP8ASJRfRLLVzy9/lzZS3IDudecbQs1hVEEyQ55OpeZLpjmStL7dq47F9FoHL32Lj4L3AcPy6kdTPc6rTRCr8NADRv7qW6pqsK1hGuonukUePNME6QFk7fEa1nUNWk5vmPmZycBO/TfdbbFGhw2kLGYxRYJ8sk7CZhUTcZ5HKHGcNklwbvCeKKFw1oa9oqEa0yfMDzGu8dVx4i4jpW7TLgXkeVg3J79B3Xj92z5/muVpSdMEGec/dO8NZOdPRxjdtzwamndPuani1HiToGgaNHQLQMAAgKiwdpjt12CvaTS8QwE99gEslltstqZxj7Y9I51XHZTsMw2PM7cqXh+FZfM7Vx5q0ZSTEIeWc2djfBE/Vwkp+VJbGZvwkgEZTAqApAoFAoBHIShKCAR0oISkoWQCmEJ6CqyyZycyVHqW3RSygVVosmVVRpGn1UK4qxoryo1Qq1sCspVm0LmuzHYs+QfKfqF5vilEvq5GiS4wB3XtNaz7Ktq4YzNnyAOHOBPzWHotPJ1KvqShFxweUYpgb7YgkEtd+KNncwVcYJeQMpeJ6Bby8shUaWPAc08nDTTZV7MAot1bRZ8kJVuXZev6jFV7ZIZbXohSDcBBuGBu1Jqc60dPlbEeiOxoUndGT4Ku+upBAE77arM39tUf8LD6jT7rcGyedyB6DVD9lt3cSfoq+k28lo6zYuEYLD8EDT4lQ5jyb+ZPNXjcIFWD4Q02J0/ytPSs2t2aF2DVqqm3lsWs1EpPJS22BjTMZA5DQK4o0Gt0ATwE8LVRS6F22+xAIpJKwAIoJKEN4iUkkwKgTSikgEaiUkkAjUkkkAoSSSShYaU1JJVLDXLhUSSVQoi1VDqIJKMuiM9MSSVQoKDkUlGEY9cnIpIIBzKSSSIQoopKFQIhFJRAGpJJIkP/2Q=="
   }
 ]
-
-  constructor() { }
+   // B: 初始化定义uploader变量,用来配置input中的uploader属性
+   public uploader:FileUploader = new FileUploader({
+    url: "http://localhost:3000/ng2/uploadFile",
+    method: "POST",
+    itemAlias: "uploadedfile"
+});
+// C: 定义事件，选择文件
+selectedFileOnChanged(event:any) {
+    // 打印文件选择名称
+    console.log(event.target.value);
+}
+// D: 定义事件，上传文件
+uploadFile() {
+    // 上传
+    this.uploader.queue[0].onSuccess = function (response, status, headers) {
+        // 上传文件成功
+        if (status == 200) {
+            // 上传文件后获取服务器返回的数据
+            let tempRes = JSON.parse(response);
+        } else {
+            // 上传文件后获取服务器返回的数据错误
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Oops...',  
+              text: 'end time is before start time! please change it',  
+              footer: '<a href>Why do I have this issue?</a>'  
+            })
+        }
+    };
+    this.uploader.queue[0].upload(); // 开始上传
+}
+  constructor() { 
+  }
 
   ngOnInit(): void {
+    this.showList = this.recipeinfo;
+    
   }
 
   SearchByName(){
+    this.showList = [];
     for( let item of this.recipeinfo)
     {
       if(item.name == this.rname){
@@ -46,5 +84,20 @@ export class HomeComponent implements OnInit {
     }
     
      return this.showList;
+  }
+  SearchByType(text:string)
+  {
+    this.showList = [];
+    for( let item of this.recipeinfo)
+    {
+      if(item.type == text){
+        this.showList.push(item);
+        
+      }
+    }
+    
+     return this.showList;
+    // console.log(text);
+    // console.log("successfully");
   }
 }
