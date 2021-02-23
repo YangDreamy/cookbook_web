@@ -7,18 +7,25 @@ import { HomeComponent } from './components/home/home.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { CommonModule }     from '@angular/common';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RecipeComponent
+    RecipeComponent,
+    ShoppingListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     CommonModule,
-    FileUploadModule
+    FileUploadModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeComponent},
+      {path: 'components/shopping-list', component: ShoppingListComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
