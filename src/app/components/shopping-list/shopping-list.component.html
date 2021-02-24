@@ -1,0 +1,24 @@
+<h2>Shopping Lists</h2>
+
+<div *ngFor="let recipe of recipes">
+  <h3>
+    <a [title]="recipe.name + ' details'" [routerLink]="['/recipes', recipe.id]">
+      {{ recipe.name }}
+    </a>
+  </h3>
+
+  <p *ngIf="recipe.description">
+    Description: {{ recipe.description }}
+  </p>
+
+  <button (click)="favourite()">
+    Add to Favorite
+  </button>
+
+  <button (click)="delete()">
+    delete
+  </button>
+
+<!--  <app-product-alerts [recipe]="recipe" (notify)="onNotify()">-->
+<!--  </app-product-alerts>-->
+</div>
