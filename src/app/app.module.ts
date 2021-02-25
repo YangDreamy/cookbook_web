@@ -7,6 +7,13 @@ import { HomeComponent } from './components/home/home.component';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { CommonModule }     from '@angular/common';
 import { FileUploadModule } from 'ng2-file-upload';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule} from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import {RouterModule} from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +25,13 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     AppRoutingModule,
     CommonModule,
-    FileUploadModule
+    FileUploadModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    // RouterModule.forRoot(AppRoutes) 
   ],
   providers: [],
   bootstrap: [AppComponent]

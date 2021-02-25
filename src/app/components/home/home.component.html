@@ -35,7 +35,7 @@
     <h3>RECOMDATION RECIPE</h3>
         <div class="div3">
          
-          <article  *ngFor="let recipe of showList">
+          <article  *ngFor="let recipe of recipeinfo">
             <img src ='data:image/jpg;base64,{{recipe.image}}'[routerLink]="['/recipeinfo']" [queryParams]= "recipe"/>
               <a href="">
                 <div>
