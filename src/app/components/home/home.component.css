@@ -37,34 +37,44 @@ input {
 }
 
 .bar1 {
-    width: 1200px;
-    height: 100px;
-    background: #f1e3bc; 
-    padding-top: 3px;
-    padding-bottom: 3px;
-    margin: 0 auto;
+    width: 80%;
+    height: 4em;
+    background: rgb(255, 174, 144);
+    padding-top: 2em;
+    padding-bottom: 5em;
+    margin: 3em 10% 2em 10%;
+    /* margin: 0 auto; */
 }
 .bar1 input {
-    border: 2px solid #bba007;
+    border: 6px solid coral;
     border-radius: 5px;
-    background: #F9F0DA;
+    /* background: #F9F0DA; */
     color: #e77e05;
 }
-.bar1 button {
+.bar1-button {
+    /* content: "search"; */
     height: 42px;
-    width: 60px;
+    width: 70px;
     position: absolute;
     top: 0;
     right: 0;
-    background: #bba007;
-    border-radius: 0 5px 5px 0;
+    background: coral;
+    border-radius: 5px;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    color: mintcream;
+    /* border: 2px solid #ddd; */
 }
 .bar1 button:before {
-    content: "search";
+    /* content: "search"; */
     font-family: FontAwesome;
-    font-size: 13px;
+    font-size: medium;
+    font-weight: bold;
     cursor: pointer;
-    color: #522a03;
+    color: white;
+    padding-top: 0.8em;
+    text-align: center;
 }
 
 .search-input:focus{
@@ -79,28 +89,21 @@ input {
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    /* margin:0 auto */
+    width: 100%;
+    margin:0 auto
 }
-
-.btn-share{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding: 0.5em; */
-    width: 7em;
-    height: 3em;
-    margin: 1em;
-    /* display:inline-block; */
-    cursor: pointer;
-    background-color: #caa93c; 
-    color: rgba(53, 45, 4, 0.993); 
-    border: 2px solid #f1e092;
-    border-radius: 12px;
-    transition: all 0.3s;
-    /* width:100px;
-    height:40px; */
-    /* display:inline-block; */
+.btn-cart{
+    height: 42px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    background: coral;
+    border-radius: 5px;
+    /* padding-top: 0.8em; */
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    color: mintcream;
 }
 
 .btn-share:hover{
@@ -123,19 +126,20 @@ input {
 .div1{
     width: 100%;
     height: 100%;
+    margin-left: 3em;
     /* border: #000 solid 1px; */
     /* margin: 50px auto; */
     /* overflow: hidden; */
     display:flex;
     flex-flow:row;
     flex-wrap: wrap ;
-    justify-content:space-around; 
+    /* justify-content:space-around;  */
     align-items:center; /*元素被拉伸以适应容器。各行将会伸展以占用剩余的空间。如果剩余的空间是负数，该值等效于'flex-start'*/
 }
 
 .div1 article{
-    width: 240px;
-    height: 220px;
+    width: 260px;
+    height: 260px;
     position:relative;
     display:inline-flex;
     justify-content:space-around; /*元素在主轴（页面）上居中排列*/
@@ -167,6 +171,7 @@ input {
     /* top: 50%;
     left: 0;
     transform: translateY(-50%); */
+    height: 100%;
     width: 100%;
     color: #ffffff;
     text-align: center;
@@ -199,7 +204,25 @@ input {
     color: #000000;
 }
 
+.btn-share{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 0.5em;
+    width: 9em;
+    height: 3em;
+    margin: 1em;
+    background-color: coral; 
+    color: white; 
+    border: 2px solid coral;
+    border-radius: 12px;
+    position: relative;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    color: mintcream;
 
+}
 
 
 

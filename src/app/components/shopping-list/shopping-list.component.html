@@ -1,6 +1,67 @@
-gi<h2>Shopping Lists</h2>
+<h2>Cookbook</h2>
+<h3>make a good diet and keep healthy</h3>
+<div class="fram">
+  <div style="width:75%">
+    <h4>welcome to your shoppingList</h4>  
+  </div>
+  <div style="width:25%">
+    <button class="btn-back" [routerLink]="['/home']" >back to homepage</button> 
+ 
+  </div>
+  
+</div>
 
-<div *ngFor="let recipe of recipes">
+
+<div class="div2">
+  <div style="width:60%">
+    <div class="div1">
+      <article  *ngFor="let recipe of recipeinfo" >
+            <img src ='data:image/jpg;base64,{{recipe.image}}' />
+           
+          <a  [routerLink]="['/recipeinfo']" [queryParams]= "recipe">
+              <div>
+                  <h4>{{recipe.name}}</h4>
+                  <div class="desc">{{recipe.intro}}</div>
+                  
+              </div>
+          </a>
+          
+            <button class="btn" (click)="deleterecipe()"><i class="fa fa-trash"></i></button>
+
+        <!-- <button class="btn"><i class="fa fa-trash"></i> Trash</button> -->
+        
+      
+        
+        
+      </article>
+    </div>
+
+  </div> 
+  <div style="width:40%;" >
+    <h3>Calorie Analyse</h3>
+    <div style="padding-left:10em;padding-right: 10em;padding-top: 1em;">
+      <div class="mat-card-content">
+        <h5>
+          Calorie:300K
+        </h5>
+     </div>
+    
+    </div>
+       
+       <h3>Nutrition Analyse</h3>
+       <div style="padding-left:10em;padding-right: 10em;padding-top: 1em;justify-content:center;">
+        <div class="mat-card-content">
+          <h5>
+            Nurtrition : 30
+
+          </h5>
+       </div>
+      
+      </div>
+</div>
+
+</div>
+<!-- <div *ngFor="let recipe of recipes">
   <h3>
     <a [title]="recipe.name + ' details'" [routerLink]="['/recipes', recipe.id]">
       {{ recipe.name }}
@@ -18,7 +79,4 @@ gi<h2>Shopping Lists</h2>
   <button (click)="delete()">
     delete
   </button>
-
-<!--  <app-product-alerts [recipe]="recipe" (notify)="onNotify()">-->
-<!--  </app-product-alerts>-->
-</div>
+</div>  -->
