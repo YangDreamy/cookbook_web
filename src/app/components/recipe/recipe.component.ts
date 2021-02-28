@@ -5,6 +5,7 @@ import { RecipeService } from 'src/app/service/recipe.service';
 import { Category } from 'src/app/datamodel/Category';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Nutrition } from 'src/app/datamodel/Nutrition';
+import { Ingredient } from 'src/app/datamodel/Ingredient';
 import Swal from 'sweetalert2'
 @Component({
   selector: 'app-recipe',
@@ -20,6 +21,7 @@ export class RecipeComponent implements OnInit {
   resCategory: Category[] = [];
   resRecRecipes: Recipe[] = [];
   resNutrition: Nutrition[] = [];
+  resIngredient: Ingredient[] = [];
 
   ngOnInit(): void {
     // console.log(this._activitedRoute.snapshot.queryParams['recipe_id']);
@@ -29,6 +31,7 @@ export class RecipeComponent implements OnInit {
     if(this.recipe_id!=undefined){
       this.getNutritionbyRecipeId(this.recipe_id);
       this.getCategoryByRecipeId(this.recipe_id);
+      this.getIngredientsByRecipeId(this.recipe_id);
     }
   }
 
@@ -94,13 +97,23 @@ export class RecipeComponent implements OnInit {
     this.recipeService.addRecipeToMealCart(recipe_id).subscribe();
   }
 
+  getIngredientsByRecipeId(recipe_id: Number) {
+    // console.log("!!!!");
+    this.recipeService.getIngredientsByRecipeId(recipe_id).subscribe((data) => {
+      // console.log(data)
+      this.resIngredient = data;
+    });
+  }
+
   addrecipe() {
     Swal.fire({
       title: 'Do you want to add to your shoppinglist?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: `Save`,
-      denyButtonText: `Don't save`,
+      confirmButtonText: `yes`,
+      confirmButtonColor: `coral`,
+      denyButtonText: `no`,
+      denyButtonColor: `rgb(238, 205, 148)`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -108,9 +121,9 @@ export class RecipeComponent implements OnInit {
         //保存
         if (this.recipe_id==undefined)return;
         this.addRecipeToMealCart(this.recipe_id);
-        Swal.fire('Saved!', '', 'success')
+        Swal.fire('Good choice !', '', 'success')
       } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+        Swal.fire('Let me see...', '', 'info')
       }
     })
   }

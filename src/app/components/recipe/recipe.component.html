@@ -8,7 +8,7 @@
       <div style="width: 80%; position: relative;">
       </div>
       <div style="width: 20%; position: relative;">
-        <button class="btn-cart"><span>Meal cart</span></button>
+        <button class="btn-cart" [routerLink]="['/mealcart']"><span><i class="fa fa-shopping-cart"></i> Meal cart</span></button>
       </div>
   </div>
 </div>
@@ -89,6 +89,28 @@
         </div>
 
         <div class="right">
+          <h3>Ingredient</h3>
+          <div class="right-steps">
+            <h6>
+              <table>
+                <!-- <caption>research until 2018</caption> -->
+                <thead>
+                  <tr>
+                    <th scope="col">Ingredient name</th>
+                    <th scope="col">Ingredient amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ingredient of resIngredient">
+                    <th scope="row">{{ingredient.ingredient_name}}</th>
+                    <td>{{ingredient.quantity_g}}</td>
+                  </tr>
+                </tbody>
+              </table>
+    
+            </h6>
+            <!-- <span class="steps" *ngFor="let ingredient of resIngredient">{{ingredient.ingredient_name}} </span> -->
+          </div>
           <h3>Steps</h3>
           <div class="right-steps">
             <span class="steps">{{resRecipe.recipe_steps}}</span>
@@ -99,7 +121,7 @@
     </div>
   </div>
   <div style="width: 40%;padding-left: 12em;">
-    <h3>RECOMDATION RECIPE</h3>
+    <h3>RECOMMENDED RECIPE</h3>
     <div class="div3">
 
       <article *ngFor="let recipe of resRecRecipes">

@@ -85,9 +85,9 @@ h4{
     flex-flow:row;
     flex-wrap: wrap ;
     padding-left:3em;
-    justify-content:space-between; 
+    justify-content:space-between;
     padding-top: 2em;
-    align-items:center; /*元素被拉伸以适应容器。各行将会伸展以占用剩余的空间。如果剩余的空间是负数，该值等效于'flex-start'*/
+    align-items:flex-start; /*元素被拉伸以适应容器。各行将会伸展以占用剩余的空间。如果剩余的空间是负数，该值等效于'flex-start'*/
 }
 
 .div1 article{
@@ -234,3 +234,35 @@ h5{
 .btn:hover {
     background-color:darkgray;
   }
+  thead,
+tfoot {
+    background-color: #f1dad3;
+    color: #fff;
+}
+
+tbody {
+    background-color: #f1c6c6;
+}
+
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(238, 234, 234);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .8rem;
+}
+
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 5px 10px;
+}
+
+td {
+    text-align: center;
+}

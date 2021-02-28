@@ -146,4 +146,29 @@ export class HomeComponent implements OnInit {
       this.resRecRecipes = data;
     });
   }
+
+  addRecipeToMealCart(recipe_id: Number) {
+    console.log("!!!!");
+    this.recipeService.addRecipeToMealCart(recipe_id).subscribe();
+  }
+
+  addRecipe(recipe_id: Number){
+    Swal.fire({
+      title: 'Do you want to add this recipe to your meal cart?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `yes`,
+      confirmButtonColor: `coral`,
+      denyButtonText: `no`,
+      denyButtonColor: `rgb(238, 205, 148)`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.addRecipeToMealCart(recipe_id);
+        Swal.fire('Good choice !', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Let me see...', '', 'info')
+      }
+    })
+  }
 }
